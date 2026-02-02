@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CRUD</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>My Contact Book</h1>
+
+    <form action="/add" method="POST">
+        <input type="text" name="u_name" placeholder="Name" required><br>
+        <input type="email" name="u_email" placeholder="Email" required><br>
+        <input type="text" name="u_phone" placeholder="Phone" required><br>
+        <button type="submit">Save Now</button>
+    </form>
+
+    <hr>
+
+  <table>
+    <tr>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Phone</th>
+        <th>Actions</th>
+    </tr>
+    {% for p in people %}
+    <tr>
+        <form action="/update/{{ p.id }}" method="POST">
+            <td><input type="text" name="u_name" value="{{ p.name }}"></td>
+            <td><input type="email" name="u_email" value="{{ p.email }}"></td>
+            <td><input type="text" name="u_phone" value="{{ p.phone }}"></td>
+            <td>
+                <button type="submit" class="clear-btn">Update</button>
+            </td>
+        </form>
+    </tr>
+    {% endfor %}
+</table>
+
+    <br>
+
+   <form action="/clear" method="POST">
+    <button type="submit" class="clear-btn">Delete All Data</button>
+</form>
+
+   <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
+
+
